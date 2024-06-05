@@ -23,25 +23,51 @@ export class HashMap{
     if (index < 0 || index >= this.capacity) {
       throw new Error("Trying to access index out of bound");
     }
+
     if(this.buckets[index]){
-      let tail = this.buckets[index];
-      while(tail.next !== null){
-        if(tail.key === key){
-          tail.value = value;
+      let currentNode = this.buckets[index];
+      while(currentNode.next !== null){
+        if(currentNode.key === key){
+          currentNode.value = value;
           return false;
         }
-        tail = tail.next;
+        currentNode = currentNode.next;
       }
-      if(tail.key === key){
-        tail.value = value;
+      if(currentNode.key === key){
+        currentNode.value = value;
         return false;
       } else {
-        tail.next = new Node(key,value);
+        currentNode.next = new Node(key,value);
         return true;
       }
-    } else {  
+    } else {
       this.buckets[index] = new Node(key,value);
       return true;
+    }
+  }
+
+  get(key){
+    const index = this.hash(key);
+    if (index < 0 || index >= this.capacity) {
+      throw new Error("Trying to access index out of bound");
+    }
+
+    if(this.buckets[index]){
+      let currentNode = this.buckets[index];
+      while(currentNode.next !== null){
+        if(currentNode.key === key){
+          return currentNode.value;
+        }
+        currentNode = currentNode.next;
+      }
+
+      if(currentNode.key === key){
+        return currentNode.value;
+      } else {
+        return null;
+      }
+    } else {
+      return null;
     }
   }
 }
