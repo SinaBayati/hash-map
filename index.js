@@ -12,4 +12,4 @@ H.set("beef",12);
 
 console.log(H.buckets);
 console.log(H.get("beef"));
-console.log(H.get("mutton"));
+console.log(H.has("cheese"));

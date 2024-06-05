@@ -70,6 +70,31 @@ export class HashMap{
       return null;
     }
   }
+
+  has(key){
+    const index = this.hash(key);
+    if (index < 0 || index >= this.capacity) {
+      throw new Error("Trying to access index out of bound");
+    }
+
+    if(this.buckets[index]){
+      let currentNode = this.buckets[index];
+      while(currentNode.next !== null){
+        if(currentNode.key === key){
+          return true;
+        }
+        currentNode = currentNode.next;
+      }
+
+      if(currentNode.key === key){
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
 }
 
 class Node{
