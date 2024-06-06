@@ -166,6 +166,11 @@ export class HashMap{
   length(){
     return this._length;
   }
+
+  clear(){
+    this.buckets = [];
+    this._length = 0;
+  }
 }
 
 class Node{
