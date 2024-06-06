@@ -38,7 +38,7 @@ H.set("item32",8);
 console.log(H.remove("item5"));
 console.log(H.getNode("item10"));
 
-console.log(H.length);
+console.log(H.length());
 
 console.log(H.buckets);
 

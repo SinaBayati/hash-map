@@ -4,7 +4,7 @@ export class HashMap{
     this.capacity = 16;
     this.loadFactor = 0.8;
     this.buckets = [];
-    this.length = 0;
+    this._length = 0;
   }
 
   hash(key){
@@ -44,12 +44,12 @@ export class HashMap{
         return false;
       } else {
         currentNode.next = new Node(key,value);
-        this.length += 1;
+        this._length += 1;
         return true;
       }
     } else {
       this.buckets[index] = new Node(key,value);
-      this.length += 1;
+      this._length += 1;
       return true;
     }
   }
@@ -136,7 +136,7 @@ export class HashMap{
     if(currentNode.next === null){
       if(currentNode.key === key){
         this.buckets[index] = null;
-        this.length -= 1;
+        this._length -= 1;
         return true;
       }
       return false;
@@ -145,7 +145,7 @@ export class HashMap{
     // more than one node on the linked list and first node must be removed
     if(currentNode.key === key){
       this.buckets[index] = currentNode.next;
-      this.length -= 1;
+      this._length -= 1;
       return true;
     }
 
@@ -154,13 +154,17 @@ export class HashMap{
     while(currentNode !== null){
       if(currentNode.key === key){
         previousNode.next = currentNode.next;
-        this.length -= 1;
+        this._length -= 1;
         return true;
       }
       previousNode = previousNode.next;
       currentNode = currentNode.next;
     }
     return false;
+  }
+
+  length(){
+    return this._length;
   }
 }
 
