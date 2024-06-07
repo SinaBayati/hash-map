@@ -5,6 +5,7 @@ export class HashMap{
     this.loadFactor = 0.8;
     this.buckets = [];
     this._length = 0;
+    this.entries = [];
   }
 
   hash(key){
@@ -28,6 +29,10 @@ export class HashMap{
   }
 
   set(key,value){
+    // add an entry to the entries array
+    this.entries.push([key,value]);
+
+    // add a new node to the buckets array
     const index = this.getIndex(key);
 
     if(this.buckets[index]){
@@ -120,7 +125,16 @@ export class HashMap{
     }
   }
 
+  removeEntry(key){
+    const i = this.entries.findIndex(e => e[0] === key);
+    this.entries.splice(i,1);
+  }
+
   remove(key){
+    // remove the item from entries array 
+    this.removeEntry(key);
+
+    // remove the node from buckets array
     const index = this.getIndex(key);
 
     const accumulator = this.buckets[index];
@@ -170,6 +184,10 @@ export class HashMap{
   clear(){
     this.buckets = [];
     this._length = 0;
+  }
+
+  keys(){
+    return this.entries.map(e => e[0]);
   }
 }
 

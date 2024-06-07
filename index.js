@@ -41,9 +41,7 @@ console.log(H.getNode("item10"));
 console.log(H.length());
 
 console.log(H.buckets);
-H.clear();
-console.log(H.buckets);
-console.log(H.length());
+console.log(H.keys());
 
 
 /*
