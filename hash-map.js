@@ -137,7 +137,6 @@ export class HashMap{
     // remove the node from buckets array
     const index = this.getIndex(key);
 
-    const accumulator = this.buckets[index];
     let previousNode = this.buckets[index];
     let currentNode = this.buckets[index];
 
@@ -188,6 +187,10 @@ export class HashMap{
 
   keys(){
     return this.entries.map(e => e[0]);
+  }
+
+  values(){
+    return this.entries.map(e => e[1]);
   }
 }
 
