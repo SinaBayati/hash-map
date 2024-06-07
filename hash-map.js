@@ -2,7 +2,6 @@ export class HashMap{
   constructor(name){
     this.name = name;
     this.capacity = 16;
-    this.loadFactor = 0.8;
     this._buckets = [];
     this._length = 0;
     this._entries = [];

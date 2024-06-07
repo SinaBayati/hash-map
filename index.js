@@ -35,12 +35,6 @@ H.set("item30",30);
 H.set("item31",31);
 H.set("item32",32);
 
-console.log(H.remove("item5"));
-console.log(H.getNode("item10"));
-
-console.log(H.length());
-
+console.log("length: "+H.length());
 console.log(H.buckets());
-console.log(H.keys());
-console.log(H.values());
-console.log(H.entries());
+
