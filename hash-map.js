@@ -3,9 +3,9 @@ export class HashMap{
     this.name = name;
     this.capacity = 16;
     this.loadFactor = 0.8;
-    this.buckets = [];
+    this._buckets = [];
     this._length = 0;
-    this.entries = [];
+    this._entries = [];
   }
 
   hash(key){
@@ -30,13 +30,13 @@ export class HashMap{
 
   set(key,value){
     // add an entry to the entries array
-    this.entries.push([key,value]);
+    this._entries.push([key,value]);
 
     // add a new node to the buckets array
     const index = this.getIndex(key);
 
-    if(this.buckets[index]){
-      let currentNode = this.buckets[index];
+    if(this._buckets[index]){
+      let currentNode = this._buckets[index];
       while(currentNode.next !== null){
         if(currentNode.key === key){
           currentNode.value = value;
@@ -53,7 +53,7 @@ export class HashMap{
         return true;
       }
     } else {
-      this.buckets[index] = new Node(key,value);
+      this._buckets[index] = new Node(key,value);
       this._length += 1;
       return true;
     }
@@ -62,8 +62,8 @@ export class HashMap{
   get(key){
     const index = this.getIndex(key);
 
-    if(this.buckets[index]){
-      let currentNode = this.buckets[index];
+    if(this._buckets[index]){
+      let currentNode = this._buckets[index];
       while(currentNode.next !== null){
         if(currentNode.key === key){
           return currentNode.value;
@@ -84,8 +84,8 @@ export class HashMap{
   getNode(key){
     const index = this.getIndex(key);
 
-    if(this.buckets[index]){
-      let currentNode = this.buckets[index];
+    if(this._buckets[index]){
+      let currentNode = this._buckets[index];
       while(currentNode.next !== null){
         if(currentNode.key === key){
           return currentNode;
@@ -106,8 +106,8 @@ export class HashMap{
   has(key){
     const index = this.getIndex(key);
 
-    if(this.buckets[index]){
-      let currentNode = this.buckets[index];
+    if(this._buckets[index]){
+      let currentNode = this._buckets[index];
       while(currentNode.next !== null){
         if(currentNode.key === key){
           return true;
@@ -126,8 +126,8 @@ export class HashMap{
   }
 
   removeEntry(key){
-    const i = this.entries.findIndex(e => e[0] === key);
-    this.entries.splice(i,1);
+    const i = this._entries.findIndex(e => e[0] === key);
+    this._entries.splice(i,1);
   }
 
   remove(key){
@@ -137,18 +137,18 @@ export class HashMap{
     // remove the node from buckets array
     const index = this.getIndex(key);
 
-    let previousNode = this.buckets[index];
-    let currentNode = this.buckets[index];
+    let previousNode = this._buckets[index];
+    let currentNode = this._buckets[index];
 
     // target index empty
-    if(!this.buckets[index]){
+    if(!this._buckets[index]){
       return false
     }
 
     // only one node on the target index linked list
     if(currentNode.next === null){
       if(currentNode.key === key){
-        this.buckets[index] = null;
+        this._buckets[index] = null;
         this._length -= 1;
         return true;
       }
@@ -157,7 +157,7 @@ export class HashMap{
 
     // more than one node on the linked list and first node must be removed
     if(currentNode.key === key){
-      this.buckets[index] = currentNode.next;
+      this._buckets[index] = currentNode.next;
       this._length -= 1;
       return true;
     }
@@ -181,16 +181,24 @@ export class HashMap{
   }
 
   clear(){
-    this.buckets = [];
+    this._buckets = [];
     this._length = 0;
   }
 
   keys(){
-    return this.entries.map(e => e[0]);
+    return this._entries.map(e => e[0]);
   }
 
   values(){
-    return this.entries.map(e => e[1]);
+    return this._entries.map(e => e[1]);
+  }
+
+  entries(){
+    return this._entries;
+  }
+
+  buckets(){
+    return this._buckets;
   }
 }
 

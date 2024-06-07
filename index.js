@@ -40,27 +40,7 @@ console.log(H.getNode("item10"));
 
 console.log(H.length());
 
-console.log(H.buckets);
+console.log(H.buckets());
 console.log(H.keys());
 console.log(H.values());
-
-
-/*
-let node = {
-  key: "milk",
-  value: 2,
-  next: {
-    key: "beef",
-    value: 8,
-    next: {
-      key: "mutton",
-      value: 14,
-      next: {
-        key: "bread",
-        value: 3,
-        next: null,
-      }
-    }
-  }
-};
-*/
+console.log(H.entries());
